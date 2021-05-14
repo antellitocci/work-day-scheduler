@@ -1,7 +1,11 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker");
+
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
+  background-color: #FFFFDB;
 }
 
 textarea{
@@ -33,11 +37,11 @@ textarea{
 .row {
   white-space: pre-wrap;
   height: 80px;
-  border-top: 1px solid white;;
+  border-top: 1px solid #FFFFDB;;
 }
 
 .hour {
-  background-color: #ffffff;
+  background-color: #FFFFDB;
   color: #000000;
   border-top: 1px dashed #000000;
 }
@@ -68,6 +72,11 @@ textarea{
 .saveBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
+}
+
+.display-3
+{
+  font-family: 'Permanent Marker', sans-serif;
 }
 
 /*adjust time text content when screen size is phone or smaller*/
