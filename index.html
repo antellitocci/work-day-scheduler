@@ -24,11 +24,18 @@
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
-    <div id="timeBlocks" class="container" style="margin-bottom: 30px;">
+    <div id="timeBlocks" class="container">
       <!-- Timeblocks go here -->
     </div>
-    <div class="row justify-content-center">
-      <button id="delete-all" class="btn">Delete All</button>
+    <div class="container">
+      <div class="row justify-content-end" id="delete">
+        <div class="row flex-row-reverse">
+          <div class="col-12">
+            <button id="delete-all" class="btn btn-danger btn-sm"><i class="fas fa-trash"> </i>Delete All Items</button>
+          </div>
+
+        </div>
+      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

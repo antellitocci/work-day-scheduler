@@ -89,7 +89,7 @@ $(".saveBtn").click(function(event){
             if(toDos[i].text == ""){
                 toDos.splice(i, 1);
             }
-            saveTasks();
+            saveToDos();
             return;
         }
     }
@@ -102,22 +102,24 @@ $(".saveBtn").click(function(event){
         };
         //push the toDo to the toDos array and save to local storage
         toDos.push(toDo);
-        saveTasks();
+        saveToDos();
     }
     
 });
 
-function saveTasks()
+//save toDos to local storage
+function saveToDos()
 {
     localStorage.setItem("toDos", JSON.stringify(toDos));
 };
 
+//delete all toDos from local storage and browser
 $("#delete-all").click(function(event){
     $(".description").each(function(){
         $(this).val("");
     });
     toDos = [];
-    saveTasks();
+    saveToDos();
 });
 
 //audit time block time colors every 15 minutes
@@ -126,7 +128,6 @@ setInterval(function(){
     $(".description").each(function(index, elem){
         var elemTime = $(this).siblings(".hour").text();
         auditTime(elem, elemTime);
-        console.log("ran the time check");
     });
 }, (1000*60)*15);
 

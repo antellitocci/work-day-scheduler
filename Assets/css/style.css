@@ -87,13 +87,22 @@ textarea{
 }
 
 #currentDay{
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   font-size: 1.5em;
 }
 
+.btn-danger{
+  margin-right: 10px;
+}
+
 /*adjust time text content when screen size is phone or smaller*/
 @media screen and (max-width: 568px){
+
+  .btn-danger
+  {
+    width: 40vw;
+  }
 
   .col-2
   {
