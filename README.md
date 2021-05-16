@@ -17,7 +17,8 @@ Daily work event planner for Butler Boot Camp challenge 5
 
 ## Preview
 
-<img src="https://raw.githubusercontent.com/antellitocci/work-day-scheduler/main/Assets/images/work-day-planner-screenshot.png" alt="Work Day Planner Screenshot"/>
+<img src="https://raw.githubusercontent.com/antellitocci/work-day-scheduler/main/Assets/images/wdp-screen-head.png" alt="Work Day Planner Screenshot"/>
+<img src="https://raw.githubusercontent.com/antellitocci/work-day-scheduler/main/Assets/images/work-day-planner-screenshot%20-%20deleteBtn.png" alt="Work Day Planner delete button"/>
 
 ## What's Here
 
