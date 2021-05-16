@@ -110,7 +110,15 @@ $(".saveBtn").click(function(event){
 function saveTasks()
 {
     localStorage.setItem("toDos", JSON.stringify(toDos));
-}
+};
+
+$("#delete-all").click(function(event){
+    $(".description").each(function(){
+        $(this).val("");
+    });
+    toDos = [];
+    saveTasks();
+});
 
 //audit time block time colors every 15 minutes
 setInterval(function(){
