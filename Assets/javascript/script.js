@@ -76,14 +76,12 @@ $(".saveBtn").click(function(event){
     var toDoFind = $(this).siblings(".description");
     var toDoText = $(toDoFind).val().trim();
     var timeSlot = $(toDoFind).attr("data-time-id");
-    console.log(toDos);
 
     //handle edits
     for (i=0; i < toDos.length; i++)
     {
         if(toDos[i].id === timeSlot)
         {
-            console.log("hit it");
             toDos[i].text = toDoText;
             //if the user removes all text - remove the to do from the array
             if(toDos[i].text == ""){
@@ -124,7 +122,6 @@ $("#delete-all").click(function(event){
 
 //audit time block time colors every 15 minutes
 setInterval(function(){
-
     $(".description").each(function(index, elem){
         var elemTime = $(this).siblings(".hour").text();
         auditTime(elem, elemTime);
