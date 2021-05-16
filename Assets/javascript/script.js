@@ -102,9 +102,6 @@ setInterval(function(){
         auditTime(elem, elemTime);
         console.log("ran the time check");
     });
-}, (30000));
-//add tasks to page from local storage
-//click into time block enter event
-//click save button and it is saved to local storage
+}, (1000*60)*15);
 
 loadToDos();
