@@ -4,6 +4,8 @@ $("#currentDay").text(moment().format("dddd, MMMM D, YYYY"));
 var startTime = 9; //9 am
 var endTime = 17; //5 pm
 
+var toDos = JSON.parse(localStorage.getItem("toDos")) || [];
+
 //create time block elements and add to html
 for (var i = startTime; i < endTime + 1; i++)
 {
@@ -15,7 +17,8 @@ for (var i = startTime; i < endTime + 1; i++)
     var timeHourElem = $("<div>").addClass("hour col-2 col-sm-1").text(timeText).attr("style", "padding-top: 30px;");
     //create task text area element
     var textAreaElem = $("<textarea>").addClass("description col-8 col-sm-10");
-    
+    //give textArea an ID
+    textAreaElem.attr("data-time-id", i);
     //pass textArea and time text to audit time to style appropriately
     auditTime(textAreaElem, timeText);
     
@@ -28,45 +31,80 @@ for (var i = startTime; i < endTime + 1; i++)
     timeRowElem.append(buttonElem);
     //append items to page
     $("#timeBlocks").append(timeRowElem);
-
-    //add id to each div in here somewhere
 }
 
+function loadToDos(){
+    $.each(toDos, function(arr, object){
+            createToDo(object.id, object.text);
+        });
+};
+
+function createToDo(timeSlot, text){
+    //find the text area to add the task date to
+    var taskToAdd = $(".description[data-time-id="+timeSlot+"]"); 
+    //add the to do
+    $(taskToAdd).val(text);
+};
+
 //audit task to assign appropriate color
-function auditTime(textAreaElem, timeText){
+function auditTime(textAreaEl, time){
     //create variable to compare current time and timeText in appropriate ISO format
-    var timeTextFormat = moment(timeText, "hA").format();
+    var timeTextFormat = moment(time, "hA").format();
+    var currentTime = moment().format();
     //color code the text area based on past / present / future
-    if (moment().isAfter(timeTextFormat, "hour")){
-        textAreaElem.addClass("past");
-        textAreaElem.removeClass("present");
-        textAreaElem.removeClass("future");
+    if (moment(currentTime).isAfter(timeTextFormat, "hour")){
+        $(textAreaEl).addClass("past");
+        $(textAreaEl).removeClass("present");
+        $(textAreaEl).removeClass("future");
     }
-    else if (moment().isSame(timeTextFormat, "hour")){
-        textAreaElem.addClass("present");
-        textAreaElem.removeClass("past");
-        textAreaElem.removeClass("future");
+    else if (moment(currentTime).isSame(timeTextFormat, "hour")){
+        $(textAreaEl).addClass("present");
+        $(textAreaEl).removeClass("past");
+        $(textAreaEl).removeClass("future");
     }
     else {
-        textAreaElem.addClass("future");
-        textAreaElem.removeClass("past");
-        textAreaElem.removeClass("presenet");
+        $(textAreaEl).addClass("future");
+        $(textAreaEl).removeClass("past");
+        $(textAreaEl).removeClass("presenet");
     }
 };    
 
+//save task to local storage when the save button is clicked
+$(".saveBtn").click(function(event){
+
+    //find the nearest text area and grab its value and id
+    var toDoFind = $(this).siblings(".description");
+    var toDoText = $(toDoFind).val().trim();
+    var timeSlot = $(toDoFind).attr("data-time-id");
+
+    if (toDoText !== ""){
+        var toDo ={
+            id: timeSlot,
+            text: toDoText
+        };
+        //push the toDo to the toDos array and save to local storage
+        toDos.push(toDo);
+        saveTasks();
+    }
+
+});
 
 function saveTasks()
 {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("toDos", JSON.stringify(toDos));
 }
 
 //audit time block time colors every 15 minutes
 setInterval(function(){
+
     $(".description").each(function(index, elem){
-        auditTime(elem);
+        var elemTime = $(this).siblings(".hour").text();
+        auditTime(elem, elemTime);
+        console.log("ran the time check");
     });
-}, (1000*60)*15);
+}, (30000));
 //add tasks to page from local storage
 //click into time block enter event
 //click save button and it is saved to local storage
 
+loadToDos();
