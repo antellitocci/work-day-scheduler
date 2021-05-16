@@ -76,7 +76,25 @@ $(".saveBtn").click(function(event){
     var toDoFind = $(this).siblings(".description");
     var toDoText = $(toDoFind).val().trim();
     var timeSlot = $(toDoFind).attr("data-time-id");
+    console.log(toDos);
 
+    //handle edits
+    for (i=0; i < toDos.length; i++)
+    {
+        if(toDos[i].id === timeSlot)
+        {
+            console.log("hit it");
+            toDos[i].text = toDoText;
+            //if the user removes all text - remove the to do from the array
+            if(toDos[i].text == ""){
+                toDos.splice(i, 1);
+            }
+            saveTasks();
+            return;
+        }
+    }
+
+    //if not editing, create and save the new to do
     if (toDoText !== ""){
         var toDo ={
             id: timeSlot,
@@ -86,7 +104,7 @@ $(".saveBtn").click(function(event){
         toDos.push(toDo);
         saveTasks();
     }
-
+    
 });
 
 function saveTasks()
