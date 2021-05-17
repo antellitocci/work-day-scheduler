@@ -120,12 +120,12 @@ $("#delete-all").click(function(event){
     saveToDos();
 });
 
-//audit time block time colors every 15 minutes
+//audit time block time colors every second
 setInterval(function(){
     $(".description").each(function(index, elem){
         var elemTime = $(this).siblings(".hour").text();
         auditTime(elem, elemTime);
     });
-}, (1000*60)*15);
+}, 1000);
 
 loadToDos();
